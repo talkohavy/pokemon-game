@@ -5,11 +5,7 @@ import AppStyles from '../../App.module.css';
 import MyStyles from './endGame.module.css';
 import { imgRedCircle } from '../../paths/images';
 
-export default function EndGame({
-  curGameStatus,
-  gameStats,
-  setIsEndGameModalOpen,
-}) {
+export default function EndGame({ curGameStatus, gameStats, closeEndGame }) {
   //------------------- Render GUI ----------------------
   return (
     <div className={AppStyles.modalBg}>
@@ -18,7 +14,7 @@ export default function EndGame({
           className={AppStyles.closeModal}
           src={imgRedCircle}
           alt='close login modal'
-          onClick={() => setIsEndGameModalOpen(false)}
+          onClick={() => closeEndGame()}
         />
         <div className={MyStyles.endGameTitle}>You Win!</div>
         <div className={MyStyles.endGameMsg}>
@@ -27,13 +23,18 @@ export default function EndGame({
         </div>
 
         <div className={MyStyles.twoButtonsRow}>
-          <button className={MyStyles.btnNewGame}>New Game</button>
+          <button
+            className={MyStyles.btnNewGame}
+            onClick={() => closeEndGame()}
+          >
+            New Game
+          </button>
           <div className={AppStyles.spacer}></div>
 
           <button
             type='button'
             className={MyStyles.btnCancel}
-            onClick={() => setIsEndGameModalOpen(false)}
+            onClick={() => closeEndGame()}
           >
             Cancel
           </button>

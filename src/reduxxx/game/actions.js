@@ -1,4 +1,5 @@
 export const ENTER_NEW_GAME_MODE = '[game] enter a new game';
+export const ENTER_END_GAME_MODE = '[game] enter end game mode';
 export const FETCH_POKEMON = '[game] fetch 2 pokemons';
 export const FETCH_POKEMON_SUCCESS = '[game] fetch pokemon success';
 export const FETCH_POKEMON_FAILURE = '[game] fetch pokemon failure';
@@ -16,6 +17,11 @@ export const REPORT_LOADING_ERROR = '[chatRoom] Report loading error';
 
 export const enterNewGameMode = (data) => ({
   type: ENTER_NEW_GAME_MODE,
+  payload: data,
+});
+
+export const enterEndGameMode = (data) => ({
+  type: ENTER_END_GAME_MODE,
   payload: data,
 });
 
@@ -43,7 +49,7 @@ export const updateGameStatus = (data) => ({
   payload: data,
 });
 
-export const updateGameStats = (data) => ({
+export const updateoverallStats = (data) => ({
   type: UPDATE_GAME_STATS,
   payload: data,
 });

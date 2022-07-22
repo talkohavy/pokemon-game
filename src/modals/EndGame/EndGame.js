@@ -5,8 +5,13 @@ import clsx from 'clsx';
 import AppStyles from '../../App.module.css';
 import MyStyles from './endGame.module.css';
 import { imgRedCircle } from '../../paths/images';
+// utils:
+import { messages } from './constants';
 
-export default function EndGame({ curGameStatus, gameStats, closeEndGame }) {
+export default function EndGame({ curGameStatus, overallStats, closeEndGame }) {
+  console.log('curGameStatus is:', curGameStatus);
+  // all functions:
+
   //------------------- Render GUI ----------------------
   return (
     <div className={AppStyles.modalBg}>
@@ -17,22 +22,25 @@ export default function EndGame({ curGameStatus, gameStats, closeEndGame }) {
           alt='close login modal'
           onClick={() => closeEndGame()}
         />
-        <div className={MyStyles.endGameTitle}>You Win!</div>
+        <div className={MyStyles.endGameTitle}>
+          {messages[curGameStatus].title}
+        </div>
         <div className={MyStyles.endGameMsg}>
-          Congratulations! You have defeated your opponent. What would you like
-          to do next?
+          {messages[curGameStatus].messages}
         </div>
         <table className={clsx(MyStyles.table, AppStyles.mgBot20)}>
           <thead className={MyStyles.thead}>
-            <th className={MyStyles.th}>Won</th>
-            <th className={MyStyles.th}>Lost</th>
-            <th className={MyStyles.th}>Tie</th>
+            <tr>
+              <th className={MyStyles.th}>Won</th>
+              <th className={MyStyles.th}>Lost</th>
+              <th className={MyStyles.th}>Tie</th>
+            </tr>
           </thead>
           <tbody className={MyStyles.tbody}>
             <tr className={MyStyles.tr}>
-              <td className={MyStyles.td}>{gameStats.wins}</td>
-              <td className={MyStyles.td}>{gameStats.loses}</td>
-              <td className={MyStyles.td}>{gameStats.ties}</td>
+              <td className={MyStyles.td}>{overallStats.wins}</td>
+              <td className={MyStyles.td}>{overallStats.loses}</td>
+              <td className={MyStyles.td}>{overallStats.ties}</td>
             </tr>
           </tbody>
         </table>

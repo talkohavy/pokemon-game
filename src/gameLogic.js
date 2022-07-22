@@ -1,8 +1,8 @@
 export const gameStatuses = {
-  ongoing: 'The fight is still on...',
-  youlose: 'Game Over',
-  youwin: 'You Win!',
-  tie: `It's a tie!`,
+  ongoing: 'ongoing',
+  lose: 'lose',
+  win: 'win',
+  tie: 'tie',
 };
 Object.freeze(gameStatuses);
 

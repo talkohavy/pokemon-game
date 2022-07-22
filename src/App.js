@@ -21,8 +21,8 @@ function App() {
   const {
     player1,
     player2,
-    curGame: { curRound, status: gameStatus },
-    stats: gameStats,
+    curGame: { curRound, status: curGameStatus },
+    stats: overallStats,
     isLoading,
     isEndGameModalOpen,
   } = useSelector((state) => {
@@ -48,7 +48,11 @@ function App() {
   return (
     <div className={clsx(AppStyles.mainWindow, AppStyles.flexColumnTopCenter)}>
       {isEndGameModalOpen && (
-        <EndGameModal gameStats={gameStats} closeEndGame={closeEndGame} />
+        <EndGameModal
+          curGameStatus={curGameStatus}
+          overallStats={overallStats}
+          closeEndGame={closeEndGame}
+        />
       )}
       {isLoading ? (
         <div>Loading...</div>
@@ -86,12 +90,12 @@ function App() {
               <button
                 className={clsx(
                   AppStyles.btnAttackCommon,
-                  gameStatus !== gameStatuses.ongoing
+                  curGameStatus !== gameStatuses.ongoing
                     ? AppStyles.btnAttackDisabled
                     : AppStyles.btnAttackActive
                 )}
                 onClick={() => dispatch(attack())}
-                disabled={gameStatus !== gameStatuses.ongoing}
+                disabled={curGameStatus !== gameStatuses.ongoing}
               >
                 Attack!
               </button>

@@ -1,5 +1,7 @@
 import {
   ENTER_NEW_GAME_MODE,
+  ENTER_END_GAME_MODE,
+  enterEndGameMode,
   fetchPokemons,
   FETCH_POKEMON,
   showSpinner,
@@ -12,7 +14,7 @@ import {
   updateHealthOf,
   updateRoundsResult,
   updateGameStatus,
-  updateGameStats,
+  updateoverallStats,
 } from './actions';
 import { openEndGame } from '../modals/actions';
 import { apiRequest } from '../api';
@@ -93,46 +95,58 @@ export const attackFlow =
     next(action);
 
     if (action.type === ATTACK) {
-      // A. show spinner
-      // dispatch(showRoundSpinner());
-      // B.
       const {
         curGame: { status: gameStatus },
         player1: { health: healthOfPlayer1 },
         player2: { health: healthOfPlayer2 },
-        stats: gameStats,
+        stats: overallStats,
       } = getState().game;
       if (gameStatus === gameStatuses.ongoing) {
         const result = attack();
         console.log('result is:', result);
-        const newHealth1 = healthOfPlayer1 - result.dmgOfPlayer2 * 4;
-        const newHealth2 = healthOfPlayer2 - result.dmgOfPlayer1 * 4;
+        const newHealth1 = Math.max(
+          0,
+          healthOfPlayer1 - result.dmgOfPlayer2 * 4
+        );
+        const newHealth2 = Math.max(
+          0,
+          healthOfPlayer2 - result.dmgOfPlayer1 * 4
+        );
         dispatch(updateRoundsResult(result));
         dispatch(updateHealthOf({ of: 1, data: newHealth1 }));
         dispatch(updateHealthOf({ of: 2, data: newHealth2 }));
-
-        if (newHealth1 <= 0 && newHealth2 <= 0) {
-          dispatch(updateGameStatus(gameStatuses.tie));
-          gameStats.ties++;
-          dispatch(updateGameStats(gameStats));
-          dispatch(openEndGame());
-          console.log(gameStatuses.tie);
-        }
-        if (newHealth1 <= 0) {
-          dispatch(updateGameStatus(gameStatuses.youlose));
-          gameStats.loses++;
-          dispatch(updateGameStats(gameStats));
-          dispatch(openEndGame());
-          console.log(gameStatuses.youlose);
-        }
-        if (newHealth2 <= 0) {
-          dispatch(updateGameStatus(gameStatuses.youwin));
-          gameStats.wins++;
-          dispatch(updateGameStats(gameStats));
-          dispatch(openEndGame());
-          console.log(gameStatuses.youwin);
+        if (newHealth1 <= 0 || newHealth2 <= 0) {
+          dispatch(
+            enterEndGameMode({ health1: newHealth1, health2: newHealth2 })
+          );
         }
       }
+    }
+  };
+
+export const enterEndGameModeFlow =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    next(action);
+
+    if (action.type === ENTER_END_GAME_MODE) {
+      const { health1, health2 } = action.payload;
+      const overallStats = getState().game.stats;
+      let gameStatus;
+      if (health1 <= 0 && health2 <= 0) {
+        gameStatus = gameStatuses.tie;
+        overallStats.ties++;
+      } else if (health1 <= 0) {
+        gameStatus = gameStatuses.lose;
+        overallStats.loses++;
+      } else {
+        gameStatus = gameStatuses.win;
+        overallStats.wins++;
+      }
+      dispatch(updateGameStatus(gameStatus));
+      dispatch(updateoverallStats(overallStats));
+      dispatch(openEndGame());
     }
   };
 
@@ -141,4 +155,5 @@ export const gameMdlwrs = [
   enterFetchPokemonFlow,
   processPokemon,
   attackFlow,
+  enterEndGameModeFlow,
 ];

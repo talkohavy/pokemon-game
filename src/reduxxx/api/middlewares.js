@@ -7,7 +7,7 @@ export const fetchApi =
   (next) =>
   (action) => {
     if (action.type === API_REQUEST) {
-      const { method, URL, body, config, onSuccess, onFailure } =
+      const { method, URL, /*body,*/ config, onSuccess, onFailure } =
         action.payload;
       if (method === 'GET') {
         Axios.get(URL, config)

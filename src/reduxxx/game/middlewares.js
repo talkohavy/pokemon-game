@@ -99,7 +99,6 @@ export const attackFlow =
         curGame: { status: gameStatus },
         player1: { health: healthOfPlayer1 },
         player2: { health: healthOfPlayer2 },
-        stats: overallStats,
       } = getState().game;
       if (gameStatus === gameStatuses.ongoing) {
         const result = attack();

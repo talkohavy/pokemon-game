@@ -43,7 +43,7 @@ function App() {
       p2: Math.floor(Math.random() * 150 + 1),
     };
     dispatch(enterNewGameMode(data));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={clsx(AppStyles.mainWindow, AppStyles.flexColumnTopCenter)}>

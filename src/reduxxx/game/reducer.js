@@ -45,14 +45,14 @@ export default function gameReducer(state = INITIAL_STATE, action) {
         player1: {
           ...state.player1,
           pokemon:
-            action.payload.for == 1
+            action.payload.for === 1
               ? action.payload.data
               : state.player1.pokemon,
         },
         player2: {
           ...state.player2,
           pokemon:
-            action.payload.for == 2
+            action.payload.for === 2
               ? action.payload.data
               : state.player2.pokemon,
         },
@@ -63,12 +63,16 @@ export default function gameReducer(state = INITIAL_STATE, action) {
         player1: {
           ...state.player1,
           health:
-            action.payload.of == 1 ? state.player1.health : action.payload.data,
+            action.payload.of === 1
+              ? state.player1.health
+              : action.payload.data,
         },
         player2: {
           ...state.player2,
           health:
-            action.payload.of == 2 ? action.payload.data : state.player1.health,
+            action.payload.of === 2
+              ? action.payload.data
+              : state.player1.health,
         },
       };
     case UPDATE_ROUNDS_RESULT:

@@ -1,0 +1,57 @@
+.uploadingText {
+  width: auto;
+}
+
+.uploadingBar {
+  position: relative;
+  border-radius: 20px;
+  height: 40px;
+  background-color: #383838;
+  border: 1px solid black;
+  -webkit-box-shadow: 0px 5px 15px -2px rgba(0, 0, 0, 0.28);
+  box-shadow: 0px 5px 15px -2px rgba(0, 0, 0, 0.28);
+}
+
+.uploadingFillerFull {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: calc(100% - 16px);
+  border-radius: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  height: 26px;
+  overflow: hidden;
+}
+
+.uploadingFiller {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+  background-color: rgb(50, 92, 182);
+  background-image: linear-gradient(45deg,
+      rgb(21, 94, 252) 6%,
+      #1941c7,
+      rgb(68, 119, 229),
+      #0162eb 50%);
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.1s ease-in-out;
+}
+
+.howMuchCompleted {
+  font-family: monospace;
+  width: auto;
+  height: 20px;
+  color: white;
+  z-index: 1;
+}
+
+@keyframes progressStripes {
+  0% {
+    background-position-x: 200px;
+  }
+}

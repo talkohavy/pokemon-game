@@ -1,0 +1,349 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-outline-radius: unset;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  scrollbar-color: rgba(93, 93, 255, 0.9) #7d8784 !important;
+  scrollbar-width: thin !important;
+}
+
+.gameZone {
+  /* position: relative;
+  height: 84vh;
+  color: black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.gameTitle {
+  font-size: 50px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.overview {
+  padding: 15px;
+  max-width: 400px;
+  min-height: 600px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dicesWrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.roundResults {
+  height: 120px;
+  border: 1px solid black;
+  margin-bottom: 30px;
+}
+
+.btnAttack {
+  border: 1px solid black;
+  background-color: rgb(255, 102, 102);
+  border-radius: 15px;
+  height: 60px;
+  max-width: 200px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btnAttack:hover {
+  background-color: rgb(233, 70, 70);
+  border-radius: 20px;
+}
+
+.btnAttack:active {
+  background-color: rgb(180, 52, 52);
+  border-radius: 20px;
+}
+
+.modalBg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 5;
+  height: 100%;
+  overflow: auto;
+  padding: 0 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.closeModal {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  user-select: none;
+  filter: saturate(0);
+}
+
+.closeModal:hover {
+  filter: saturate(100%);
+}
+
+.closeModal:active {
+  filter: saturate(70%);
+}
+
+.spacer {
+  width: 30px;
+  height: 1px;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 18px;
+  font-family: 'corbel', 'tahoma';
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.mainWindow {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  /* needed for stars in page 404  */
+  min-height: calc(100vh - 230px);
+}
+
+.mainWindow::-webkit-scrollbar {
+  width: 0;
+  opacity: 0;
+  overflow-x: hidden;
+}
+
+.shakeAnime {
+  animation-name: shake;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  cursor: pointer;
+}
+
+.shakeAnime:hover {
+  animation-name: shake;
+}
+
+@keyframes shakeAnim {
+  0% {
+    left: 0;
+  }
+
+  1% {
+    left: -3px;
+  }
+
+  2% {
+    left: 5px;
+  }
+
+  3% {
+    left: -8px;
+  }
+
+  4% {
+    left: 8px;
+  }
+
+  5% {
+    left: -5px;
+  }
+
+  6% {
+    left: 3px;
+  }
+
+  7% {
+    left: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    left: 0;
+  }
+
+  1% {
+    left: -3px;
+  }
+
+  2% {
+    left: 5px;
+  }
+
+  3% {
+    left: -8px;
+  }
+
+  4% {
+    left: 8px;
+  }
+
+  5% {
+    left: -5px;
+  }
+
+  6% {
+    left: 3px;
+  }
+
+  7% {
+    left: 0;
+  }
+}
+
+.blurScreen {
+  filter: blur(4px);
+}
+
+.mgBot10 {
+  margin-bottom: 10px;
+}
+
+.mgBot20 {
+  margin-bottom: 20px;
+}
+
+.mgTop10 {
+  margin-top: 10px;
+}
+
+.mgTop20 {
+  margin-top: 20px;
+}
+
+.textAlignCenter {
+  text-align: center;
+  direction: ltr;
+}
+
+.textAlignLeft {
+  text-align: left;
+  direction: ltr;
+}
+
+.textAlignRight {
+  text-align: right;
+  direction: ltr;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexCenterRight {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flexCenterLeft {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flexUpRight {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flexCenterUp {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.flexUpLeft {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.flexDownRight {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexBetweenUp {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.flexAround {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flexColumnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexColumnTopCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flexColumnCenterRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flexColumnBetween {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

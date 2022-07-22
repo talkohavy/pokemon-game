@@ -1,0 +1,28 @@
+.playerZone {
+  display: block;
+  width: 400px;
+  padding: 20px;
+}
+
+.playerName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.underHealthBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.healthPoints {
+  width: auto;
+  font-size: 28px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.pokemonImage {
+  width: 120px;
+  object-fit: cover;
+}

@@ -11,6 +11,7 @@ import {
   reportLoadingError,
   updatePokemonFor,
   ATTACK,
+  updateIsAttacking,
   updateHealthOf,
   updateRoundsResult,
   updateGameStatus,
@@ -95,6 +96,7 @@ export const attackFlow =
     next(action);
 
     if (action.type === ATTACK) {
+      dispatch(updateIsAttacking(true));
       const {
         curGame: { status: gameStatus },
         player1: { health: healthOfPlayer1 },
@@ -118,6 +120,10 @@ export const attackFlow =
           dispatch(
             enterEndGameMode({ health1: newHealth1, health2: newHealth2 })
           );
+        } else {
+          setTimeout(() => {
+            dispatch(updateIsAttacking(false));
+          }, 200);
         }
       }
     }

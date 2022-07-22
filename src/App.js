@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import clsx from 'clsx';
 
 // redux actions:
 import { enterNewGameMode, attack } from './reduxxx/game/actions';
-import { closeEndGame } from './reduxxx/modals/actions';
 
 // components:
 import Player from './Player';
@@ -21,8 +20,7 @@ function App() {
   const {
     player1,
     player2,
-    curGame: { curRound, status: curGameStatus },
-    stats: overallStats,
+    curGame: { isAttacking, curRound, status: curGameStatus },
     isLoading,
     isEndGameModalOpen,
   } = useSelector((state) => {
@@ -30,11 +28,15 @@ function App() {
       player1: state.game.player1,
       player2: state.game.player2,
       curGame: state.game.curGame,
-      stats: state.game.stats,
       isLoading: state.game.isLoading,
       isEndGameModalOpen: state.modals.endgame,
     };
   });
+
+  // all useStates:
+  const [isDisabled, setIsDisabled] = useState(
+    isAttacking || curGameStatus !== gameStatuses.ongoing
+  );
 
   // all useEffects:
   useEffect(() => {
@@ -45,15 +47,18 @@ function App() {
     dispatch(enterNewGameMode(data));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (
+      isDisabled !== (isAttacking || curGameStatus !== gameStatuses.ongoing)
+    ) {
+      setIsDisabled(!isDisabled);
+    }
+  }, [isAttacking, curGameStatus]);
+
+  // --------------------- render GUI ---------------------------
   return (
     <div className={clsx(AppStyles.mainWindow, AppStyles.flexColumnTopCenter)}>
-      {isEndGameModalOpen && (
-        <EndGameModal
-          curGameStatus={curGameStatus}
-          overallStats={overallStats}
-          closeEndGame={closeEndGame}
-        />
-      )}
+      {isEndGameModalOpen && <EndGameModal />}
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -64,6 +69,7 @@ function App() {
               who={'you'}
               curHealth={player1.health}
               pokemon={player1.pokemon}
+              gotHit={isAttacking}
             />
             <div
               className={clsx(
@@ -90,12 +96,12 @@ function App() {
               <button
                 className={clsx(
                   AppStyles.btnAttackCommon,
-                  curGameStatus !== gameStatuses.ongoing
+                  isDisabled
                     ? AppStyles.btnAttackDisabled
                     : AppStyles.btnAttackActive
                 )}
                 onClick={() => dispatch(attack())}
-                disabled={curGameStatus !== gameStatuses.ongoing}
+                disabled={isDisabled}
               >
                 Attack!
               </button>
@@ -104,6 +110,7 @@ function App() {
               who={'opponent'}
               curHealth={player2.health}
               pokemon={player2.pokemon}
+              gotHit={isAttacking}
             />
           </div>
         </>

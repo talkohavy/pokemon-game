@@ -4,6 +4,7 @@ import {
   UPDATE_ROUNDS_RESULT,
   UPDATE_GAME_STATUS,
   UPDATE_GAME_STATS,
+  UPDATE_IS_ATTACKING,
   SHOW_SPINNER,
   HIDE_SPINNER,
 } from './actions';
@@ -21,6 +22,7 @@ const INITIAL_STATE = {
     pokemon: null,
   },
   curGame: {
+    isAttacking: false,
     rounds: [], // not implemented yet!
     status: gameStatuses.ongoing,
     curRound: {
@@ -95,6 +97,14 @@ export default function gameReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         stats: action.payload,
+      };
+    case UPDATE_IS_ATTACKING:
+      return {
+        ...state,
+        curGame: {
+          ...state.curGame,
+          isAttacking: action.payload,
+        },
       };
     case SHOW_SPINNER:
       return {

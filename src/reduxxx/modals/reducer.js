@@ -1,7 +1,7 @@
 import { TOGGLE_MODAL } from './actions';
 
 const INITIAL_STATE = {
-  endgame: false,
+  endgame: true,
 };
 
 export default function modalsReducer(state = INITIAL_STATE, action) {

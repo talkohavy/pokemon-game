@@ -5,6 +5,7 @@ export const FETCH_POKEMON_SUCCESS = '[game] fetch pokemon success';
 export const FETCH_POKEMON_FAILURE = '[game] fetch pokemon failure';
 export const UPDATE_POKEMON_FOR = '[game] update pokemon for player';
 export const ATTACK = '[game] launch an attack!';
+export const UPDATE_IS_ATTACKING = '[game] update isAttacking';
 export const UPDATE_HEALTH = '[game] update health of player';
 export const UPDATE_ROUNDS_RESULT = `[game] update round's result`;
 export const UPDATE_GAME_STATUS = `[game] update game's status`;
@@ -32,6 +33,11 @@ export const fetchPokemons = (data) => ({
 
 export const attack = () => ({
   type: ATTACK,
+});
+
+export const updateIsAttacking = (data) => ({
+  type: UPDATE_IS_ATTACKING,
+  payload: data,
 });
 
 export const updateHealthOf = (data) => ({

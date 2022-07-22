@@ -1,14 +1,16 @@
 import React from 'react';
+import clsx from 'clsx';
 
+import AppStyles from '../App.module.css';
 import MyStyles from './player.module.css';
 import HealthBar from '../HealthBar';
 
 export default function Player({
   who = 'opponent',
-  pokemonName = 'pikachu',
   pokemon = {},
   curHealth = 100,
   maxHealth = 100,
+  gotHit = false,
 }) {
   return (
     <div
@@ -24,7 +26,7 @@ export default function Player({
         <img
           src={pokemon?.sprites?.back_default}
           alt={`player ${who}`}
-          className={MyStyles.pokemonImage}
+          className={clsx(MyStyles.pokemonImage, gotHit && AppStyles.hitAnime)}
         />
         <span className={MyStyles.healthPoints}>
           {Math.max(0, curHealth)}/{maxHealth}

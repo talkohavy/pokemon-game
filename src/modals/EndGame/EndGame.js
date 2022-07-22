@@ -7,10 +7,13 @@ import MyStyles from './endGame.module.css';
 import { imgRedCircle } from '../../paths/images';
 // utils:
 import { messages } from './constants';
+import { gameStatuses } from '../../gameLogic';
 
 export default function EndGame({ curGameStatus, overallStats, closeEndGame }) {
   console.log('curGameStatus is:', curGameStatus);
   // all functions:
+
+  if (curGameStatus === gameStatuses.ongoing) return null;
 
   //------------------- Render GUI ----------------------
   return (

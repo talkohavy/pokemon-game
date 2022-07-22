@@ -1,1 +1,1 @@
-export { default } from './EndGame';
+export { default } from './EndGameContainer';

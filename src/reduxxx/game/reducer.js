@@ -1,8 +1,9 @@
 import {
   UPDATE_POKEMON_FOR,
-  SET_HEALTH,
-  SET_ROUNDS_RESULT,
-  SET_GAME_STATUS,
+  UPDATE_HEALTH,
+  UPDATE_ROUNDS_RESULT,
+  UPDATE_GAME_STATUS,
+  UPDATE_GAME_STATS,
   SHOW_SPINNER,
   HIDE_SPINNER,
 } from './actions';
@@ -20,7 +21,7 @@ const INITIAL_STATE = {
     pokemon: null,
   },
   curGame: {
-    rounds: [],
+    rounds: [], // not implemented yet!
     status: gameStatuses.ongoing,
     curRound: {
       dmgOfPlayer1: null,
@@ -30,6 +31,7 @@ const INITIAL_STATE = {
   stats: {
     wins: 0,
     loses: 0,
+    ties: 0,
   },
   isLoading: true,
   isLoadingFailed: false,
@@ -55,7 +57,7 @@ export default function gameReducer(state = INITIAL_STATE, action) {
               : state.player2.pokemon,
         },
       };
-    case SET_HEALTH:
+    case UPDATE_HEALTH:
       return {
         ...state,
         player1: {
@@ -69,7 +71,7 @@ export default function gameReducer(state = INITIAL_STATE, action) {
             action.payload.of == 2 ? action.payload.data : state.player1.health,
         },
       };
-    case SET_ROUNDS_RESULT:
+    case UPDATE_ROUNDS_RESULT:
       return {
         ...state,
         curGame: {
@@ -77,13 +79,18 @@ export default function gameReducer(state = INITIAL_STATE, action) {
           curRound: action.payload,
         },
       };
-    case SET_GAME_STATUS:
+    case UPDATE_GAME_STATUS:
       return {
         ...state,
         curGame: {
           ...state.curGame,
           status: action.payload,
         },
+      };
+    case UPDATE_GAME_STATS:
+      return {
+        ...state,
+        stats: action.payload,
       };
     case SHOW_SPINNER:
       return {

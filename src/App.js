@@ -22,6 +22,7 @@ function App() {
     player1,
     player2,
     curGame: { curRound, status: gameStatus },
+    stats: gameStats,
     isLoading,
     isEndGameModalOpen,
   } = useSelector((state) => {
@@ -29,21 +30,11 @@ function App() {
       player1: state.game.player1,
       player2: state.game.player2,
       curGame: state.game.curGame,
+      stats: state.game.stats,
       isLoading: state.game.isLoading,
-      isEndGameModalOpen: state.modals.endGame,
+      isEndGameModalOpen: state.modals.endgame,
     };
   });
-
-  // all useStates:
-  // const [pokemon1, setPokemon1] = useState(null);
-  // const [pokemon2, setPokemon2] = useState(null);
-  // const [player1Health, setPlayer1Health] = useState(100);
-  // const [player2Health, setPlayer2Health] = useState(100);
-  // const [player1Damage, setPlayer1Damage] = useState('?');
-  // const [player2Damage, setPlayer2Damage] = useState('?');
-  // const [isEndGameModalOpen, setIsEndGameModalOpen] = useState(false);
-
-  // const [gameStatus, setGameStatus] = useState(gameStatuses.ongoing);
 
   // all useEffects:
   useEffect(() => {
@@ -57,7 +48,7 @@ function App() {
   return (
     <div className={clsx(AppStyles.mainWindow, AppStyles.flexColumnTopCenter)}>
       {isEndGameModalOpen && (
-        <EndGameModal gameStats={null} closeEndGame={closeEndGame} />
+        <EndGameModal gameStats={gameStats} closeEndGame={closeEndGame} />
       )}
       {isLoading ? (
         <div>Loading...</div>

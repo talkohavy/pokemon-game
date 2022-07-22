@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 // styles:
 import AppStyles from '../../App.module.css';
@@ -21,6 +22,20 @@ export default function EndGame({ curGameStatus, gameStats, closeEndGame }) {
           Congratulations! You have defeated your opponent. What would you like
           to do next?
         </div>
+        <table className={clsx(MyStyles.table, AppStyles.mgBot20)}>
+          <thead className={MyStyles.thead}>
+            <th className={MyStyles.th}>Won</th>
+            <th className={MyStyles.th}>Lost</th>
+            <th className={MyStyles.th}>Tie</th>
+          </thead>
+          <tbody className={MyStyles.tbody}>
+            <tr className={MyStyles.tr}>
+              <td className={MyStyles.td}>{gameStats.wins}</td>
+              <td className={MyStyles.td}>{gameStats.loses}</td>
+              <td className={MyStyles.td}>{gameStats.ties}</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div className={MyStyles.twoButtonsRow}>
           <button

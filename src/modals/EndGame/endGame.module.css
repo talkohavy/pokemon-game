@@ -50,6 +50,11 @@
   margin-bottom: 40px;
 }
 
+.table, .th, .tr, .td, .tbody, .thead {
+  min-width: 100px;
+  width: auto;
+}
+
 .twoButtonsRow {
   display: flex;
   justify-content: space-around;

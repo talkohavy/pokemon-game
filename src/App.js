@@ -13,12 +13,11 @@ import Spinner from './Spinner';
 import LoadingFailed from './LoadingFailed';
 
 // utils:
-import { gameStatuses } from './utils/helpers';
-import gameConfig from './pokemon.config';
 import AppStyles from './App.module.css';
+import { gameStatuses } from './utils/helpers';
+import gameConfig from './game.config';
 
 const { chooseBetween } = gameConfig;
-console.log('chooseBetween is:', chooseBetween);
 
 function App() {
   const dispatch = useDispatch();

@@ -11,6 +11,6 @@ export const messages = {
   tie: {
     title: `It's a tie!`,
     message:
-      'Looks like you two were equaly matched. This was a close one. Would you like to go again?',
+      'Looks like you two were equaly matched. This sure was a close one. Would you like to go again?',
   },
 };

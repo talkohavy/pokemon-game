@@ -1,4 +1,4 @@
-import config from '../pokemon.config';
+import config from '../game.config';
 
 export const gameStatuses = {
   ongoing: 'ongoing',

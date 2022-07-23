@@ -1,5 +1,7 @@
 export const ENTER_NEW_GAME_MODE = '[game] enter a new game';
 export const ENTER_END_GAME_MODE = '[game] enter end game mode';
+// export const HARD_RESET = '[game] hard reset game';
+export const RESET_GAME = '[game] reset game';
 export const FETCH_POKEMON = '[game] fetch 2 pokemons';
 export const FETCH_POKEMON_SUCCESS = '[game] fetch pokemon success';
 export const FETCH_POKEMON_FAILURE = '[game] fetch pokemon failure';
@@ -25,6 +27,14 @@ export const enterEndGameMode = (data) => ({
   type: ENTER_END_GAME_MODE,
   payload: data,
 });
+
+export const resetGame = () => ({
+  type: RESET_GAME,
+});
+
+// export const hardReset = () => ({
+//   type: HARD_RESET,
+// });
 
 export const fetchPokemons = (data) => ({
   type: FETCH_POKEMON,

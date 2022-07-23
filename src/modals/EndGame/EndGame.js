@@ -8,8 +8,17 @@ import { imgRedCircle } from '../../paths/images';
 // utils:
 import { messages } from './constants';
 import { gameStatuses } from '../../utils/helpers';
+import gameConfig from '../../game.config';
 
-export default function EndGame({ curGameStatus, overallStats, closeEndGame }) {
+const { chooseBetween } = gameConfig;
+
+export default function EndGame({
+  curGameStatus,
+  overallStats,
+  closeEndGame,
+  enterNewGameMode,
+  // hardReset,
+}) {
   // all functions:
 
   if (curGameStatus === gameStatuses.ongoing) return null;
@@ -24,11 +33,11 @@ export default function EndGame({ curGameStatus, overallStats, closeEndGame }) {
           alt='close login modal'
           onClick={() => closeEndGame()}
         />
-        <div className={MyStyles.endGameTitle}>
+        <div className={clsx(MyStyles.endGameTitle, MyStyles[curGameStatus])}>
           {messages[curGameStatus].title}
         </div>
         <div className={MyStyles.endGameMsg}>
-          {messages[curGameStatus].messages}
+          {messages[curGameStatus].message}
         </div>
         <table className={clsx(MyStyles.table, AppStyles.mgBot20)}>
           <thead className={MyStyles.thead}>
@@ -50,7 +59,22 @@ export default function EndGame({ curGameStatus, overallStats, closeEndGame }) {
         <div className={MyStyles.twoButtonsRow}>
           <button
             className={MyStyles.btnNewGame}
-            onClick={() => closeEndGame()}
+            onClick={() => {
+              closeEndGame();
+              const data = {
+                p1:
+                  chooseBetween.min +
+                  Math.floor(
+                    Math.random() * (chooseBetween.max - chooseBetween.min)
+                  ),
+                p2:
+                  chooseBetween.min +
+                  Math.floor(
+                    Math.random() * (chooseBetween.max - chooseBetween.min)
+                  ),
+              };
+              enterNewGameMode(data);
+            }}
           >
             New Game
           </button>

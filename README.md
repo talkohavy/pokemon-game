@@ -3,7 +3,7 @@
 This project is a mini-game simulating a pokemon battle.\
 The game has a config file, which you can manipulate to control some of the game's features.
 Normally, the config file would sit under the root directoy, but since this project was made with create-react-app, which doesn't allow for files to fall under the root directory, the config file is placed under the src folder.\
-You can find it under the name of pokemon.config.js .
+You can find it under the name of game.config.js .
 
 
 

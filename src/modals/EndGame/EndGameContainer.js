@@ -6,6 +6,7 @@ import EndGame from './EndGame';
 
 // redux actions:
 import { closeEndGame } from '../../reduxxx/modals/actions';
+import { enterNewGameMode /*, hardReset */ } from '../../reduxxx/game/actions';
 
 // Connect's 1st action:
 const mapStateToProps = (state, props) => {
@@ -19,6 +20,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeEndGame: () => dispatch(closeEndGame()),
+    // hardReset: () => dispatch(hardReset()),
+    enterNewGameMode: (data) => dispatch(enterNewGameMode(data)),
   };
 };
 

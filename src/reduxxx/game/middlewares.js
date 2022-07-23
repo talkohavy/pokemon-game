@@ -2,6 +2,7 @@ import {
   ENTER_NEW_GAME_MODE,
   ENTER_END_GAME_MODE,
   enterEndGameMode,
+  resetGame,
   fetchPokemons,
   FETCH_POKEMON,
   showSpinner,
@@ -20,6 +21,9 @@ import {
 import { openEndGame } from '../modals/actions';
 import { apiRequest } from '../api';
 import { attack, gameStatuses } from '../../utils/helpers';
+import gameConfig from '../../game.config';
+
+const { delayBetweenAttacks } = gameConfig;
 
 export const enterNewGameModeFlow =
   ({ dispatch }) =>
@@ -32,6 +36,8 @@ export const enterNewGameModeFlow =
       dispatch(showSpinner());
       // B. fetch whoRows
       dispatch(fetchPokemons(action.payload));
+      // C. reset game
+      dispatch(resetGame());
     }
   };
 
@@ -96,7 +102,7 @@ export const attackFlow =
     next(action);
 
     if (action.type === ATTACK) {
-      dispatch(updateIsAttacking(true));
+      delayBetweenAttacks && dispatch(updateIsAttacking(true));
       const {
         curGame: { status: gameStatus },
         player1: { health: healthOfPlayer1 },
@@ -120,9 +126,10 @@ export const attackFlow =
             enterEndGameMode({ health1: newHealth1, health2: newHealth2 })
           );
         } else {
-          setTimeout(() => {
-            dispatch(updateIsAttacking(false));
-          }, 200);
+          delayBetweenAttacks &&
+            setTimeout(() => {
+              dispatch(updateIsAttacking(false));
+            }, delayBetweenAttacks);
         }
       }
     }

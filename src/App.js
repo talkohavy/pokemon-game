@@ -9,11 +9,12 @@ import { enterNewGameMode, attack } from './reduxxx/game/actions';
 import Player from './Player';
 import Dice from './Dice';
 import EndGameModal from './modals/EndGame';
+import Spinner from './Spinner';
 import LoadingFailed from './LoadingFailed';
 
 // utils:
 import { gameStatuses } from './utils/helpers';
-import gameConfig from './utils/gameConfig';
+import gameConfig from './pokemon.config';
 import AppStyles from './App.module.css';
 
 const { chooseBetween } = gameConfig;
@@ -72,7 +73,9 @@ function App() {
     <div className={clsx(AppStyles.mainWindow, AppStyles.flexColumnTopCenter)}>
       {isEndGameModalOpen && <EndGameModal />}
       {isLoading ? (
-        <div>Loading...</div>
+        <div className={clsx(AppStyles.spinnerWrapper, AppStyles.flexCenter)}>
+          <Spinner />
+        </div>
       ) : isLoadingFailed ? (
         <LoadingFailed />
       ) : (

@@ -79,33 +79,9 @@
   cursor: default;
 }
 
-
-/* .btnAttack {
-  border: 1px solid black;
-  background-color: rgb(255, 102, 102);
-  border-radius: 15px;
-  height: 60px;
-  max-width: 200px;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
+.spinnerWrapper {
+  height: 100vh;
 }
-
-.btnAttack:hover {
-  background-color: rgb(233, 70, 70);
-  border-radius: 20px;
-}
-
-.btnAttack:active {
-  background-color: rgb(180, 52, 52);
-  border-radius: 20px;
-}
-
-.btnAttackDisabled {
-  border: 1px solid black;
-  background-color: #d1d1d1;
-  cursor: default;
-} */
 
 .modalBg {
   position: fixed;

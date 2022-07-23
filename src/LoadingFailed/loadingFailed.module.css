@@ -1,0 +1,13 @@
+.loadingFailedContent {
+    height: 100vh;
+}
+
+.imgLoadingFailed {
+    width: 250px;
+    border-radius: 15px;
+}
+
+.loadingFailedMsg {
+    text-align: center;
+    font-size: 36px;
+}

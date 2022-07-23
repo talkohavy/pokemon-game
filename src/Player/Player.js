@@ -24,7 +24,11 @@ export default function Player({
       <HealthBar completed={Math.max(0, (curHealth / maxHealth) * 100)} />
       <div className={MyStyles.underHealthBar}>
         <img
-          src={pokemon?.sprites?.back_default}
+          src={
+            who === 'opponent'
+              ? pokemon?.sprites?.front_default
+              : pokemon?.sprites?.back_default
+          }
           alt={`player ${who}`}
           className={clsx(MyStyles.pokemonImage, gotHit && AppStyles.hitAnime)}
         />

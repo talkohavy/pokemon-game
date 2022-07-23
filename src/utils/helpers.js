@@ -9,7 +9,7 @@ export const gameStatuses = {
 Object.freeze(gameStatuses);
 
 export function roleDice() {
-  return Math.floor(Math.random() * 6 + 1);
+  return 1 + Math.floor(Math.random() * 6);
 }
 
 export function attack() {

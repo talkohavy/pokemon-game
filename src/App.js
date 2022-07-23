@@ -121,6 +121,33 @@ function App() {
               >
                 Attack!
               </button>
+              {curGameStatus !== gameStatuses.ongoing && (
+                <button
+                  className={clsx(
+                    AppStyles.btnAttackCommon,
+                    AppStyles.btnAttackActive
+                  )}
+                  onClick={() => {
+                    const data = {
+                      p1:
+                        chooseBetween.min +
+                        Math.floor(
+                          Math.random() *
+                            (chooseBetween.max - chooseBetween.min)
+                        ),
+                      p2:
+                        chooseBetween.min +
+                        Math.floor(
+                          Math.random() *
+                            (chooseBetween.max - chooseBetween.min)
+                        ),
+                    };
+                    dispatch(enterNewGameMode(data));
+                  }}
+                >
+                  New Game
+                </button>
+              )}
             </div>
             <Player
               who={'opponent'}

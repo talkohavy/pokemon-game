@@ -5,5 +5,5 @@ export default {
   healthOfPlayer2: 100,
   dmgFunction: roleDice,
   chooseBetween: { min: 1, max: 152 },
-  delayBetweenAttacks: 0,
+  delayBetweenAttacks: 1,
 };

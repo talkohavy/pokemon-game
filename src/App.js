@@ -14,6 +14,8 @@ import LoadingFailed from './LoadingFailed';
 
 // utils:
 import AppStyles from './App.module.css';
+import gameConfig from './game.config';
+const { healthOfPlayer1, healthOfPlayer2 } = gameConfig;
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +60,7 @@ function App() {
             <Player
               who={'you'}
               curHealth={player1.health}
+              maxHealth={healthOfPlayer1}
               pokemon={player1.pokemon}
               gotHit={isAttacking}
             />
@@ -65,6 +68,7 @@ function App() {
             <Player
               who={'opponent'}
               curHealth={player2.health}
+              maxHealth={healthOfPlayer2}
               pokemon={player2.pokemon}
               gotHit={isAttacking}
             />

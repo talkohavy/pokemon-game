@@ -65,26 +65,28 @@ export default function CommandBox({
         Attack!
       </button>
       {curGameStatus !== gameStatuses.ongoing && (
-        <button
-          className={clsx(MyStyles.btnAttackCommon, MyStyles.btnAttackActive)}
-          onClick={() => {
-            const data = {
-              p1:
-                chooseBetween.min +
-                Math.floor(
-                  Math.random() * (chooseBetween.max - chooseBetween.min)
-                ),
-              p2:
-                chooseBetween.min +
-                Math.floor(
-                  Math.random() * (chooseBetween.max - chooseBetween.min)
-                ),
-            };
-            enterNewGameMode(data);
-          }}
-        >
-          New Game
-        </button>
+        <>
+          <button
+            className={MyStyles.btnNewGame}
+            onClick={() => {
+              enterNewGameMode({ type: 'opponent' });
+            }}
+          >
+            <div className={MyStyles.btnMainTxt}>New Game</div>
+            <div className={MyStyles.btnSubTxt}>with same pokemon</div>
+          </button>
+
+          <button
+            type='button'
+            className={MyStyles.btnStartOver}
+            onClick={() => {
+              enterNewGameMode({ type: 'both' });
+            }}
+          >
+            <div className={MyStyles.btnMainTxt}>Start Over</div>
+            <div className={MyStyles.btnSubTxt}>with a new pokemon</div>
+          </button>
+        </>
       )}
     </div>
   );

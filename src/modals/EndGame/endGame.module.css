@@ -46,7 +46,6 @@
 
 .win {
   color: gold;
-
 }
 
 .lose {
@@ -97,7 +96,7 @@
   background-color: #ff353c;
 }
 
-.btnCancel {
+.btnStartOver {
   height: 60px;
   width: 40%;
   border: 1.5px solid #333;
@@ -109,12 +108,20 @@
   cursor: pointer;
 }
 
-.btnCancel:hover {
+.btnStartOver:hover {
   border-radius: 15px;
   background-color: #acb9b6;
 }
 
-.btnCancel:active {
+.btnStartOver:active {
   border-radius: 20px;
   background-color: #7d8784;
+}
+
+.btnMainTxt {
+  font-size: 20px;
+}
+
+.btnSubTxt {
+  font-size: 13px;
 }

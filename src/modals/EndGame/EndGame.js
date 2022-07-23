@@ -61,31 +61,24 @@ export default function EndGame({
             className={MyStyles.btnNewGame}
             onClick={() => {
               closeEndGame();
-              const data = {
-                p1:
-                  chooseBetween.min +
-                  Math.floor(
-                    Math.random() * (chooseBetween.max - chooseBetween.min)
-                  ),
-                p2:
-                  chooseBetween.min +
-                  Math.floor(
-                    Math.random() * (chooseBetween.max - chooseBetween.min)
-                  ),
-              };
-              enterNewGameMode(data);
+              enterNewGameMode({ type: 'opponent' });
             }}
           >
-            New Game
+            <div className={MyStyles.btnMainTxt}>New Game</div>
+            <div className={MyStyles.btnSubTxt}>with same pokemon</div>
           </button>
           <div className={AppStyles.spacer}></div>
 
           <button
             type='button'
-            className={MyStyles.btnCancel}
-            onClick={() => closeEndGame()}
+            className={MyStyles.btnStartOver}
+            onClick={() => {
+              closeEndGame();
+              enterNewGameMode({ type: 'both' });
+            }}
           >
-            Cancel
+            <div className={MyStyles.btnMainTxt}>Start Over</div>
+            <div className={MyStyles.btnSubTxt}>with a new pokemon</div>
           </button>
         </div>
       </div>

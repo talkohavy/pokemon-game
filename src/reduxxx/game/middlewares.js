@@ -144,8 +144,8 @@ export const attackFlow =
       } = getState().game;
       if (gameStatus === gameStatuses.ongoing) {
         const result = attack();
-        const newHealth1 = Math.max(0, healthOfPlayer1 - result.dmgOfPlayer2);
-        const newHealth2 = Math.max(0, healthOfPlayer2 - result.dmgOfPlayer1);
+        const newHealth1 = 0; //Math.max(0, healthOfPlayer1 - result.dmgOfPlayer2);
+        const newHealth2 = 10; //Math.max(0, healthOfPlayer2 - result.dmgOfPlayer1);
         dispatch(updateRoundsResult(result));
         dispatch(updateHealthOf({ of: 'player1', data: newHealth1 }));
         dispatch(updateHealthOf({ of: 'player2', data: newHealth2 }));

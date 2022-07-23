@@ -62,19 +62,9 @@ export default function gameReducer(state = INITIAL_STATE, action) {
     case UPDATE_HEALTH:
       return {
         ...state,
-        player1: {
-          ...state.player1,
-          health:
-            action.payload.of === 1
-              ? state.player1.health
-              : action.payload.data,
-        },
-        player2: {
-          ...state.player2,
-          health:
-            action.payload.of === 2
-              ? action.payload.data
-              : state.player1.health,
+        [action.payload.of]: {
+          ...state[action.payload.of],
+          health: action.payload.data,
         },
       };
     case UPDATE_ROUNDS_RESULT:

@@ -15,7 +15,6 @@ export const fetchApi =
             // if (error) {
             //   return dispatch({ type: onFailure, payload: errorMsg });
             // }
-            console.log('response is:', response);
             return dispatch({ type: onSuccess, payload: response });
           })
           .catch((errorMsg) => {

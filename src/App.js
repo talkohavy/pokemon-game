@@ -51,7 +51,7 @@ function App() {
     if (
       isDisabled !== (isAttacking || curGameStatus !== gameStatuses.ongoing)
     ) {
-      setIsDisabled(!isDisabled);
+      setIsDisabled((prevState) => !isDisabled);
     }
   }, [isAttacking, curGameStatus]);
 
@@ -96,6 +96,7 @@ function App() {
               <button
                 className={clsx(
                   AppStyles.btnAttackCommon,
+                  AppStyles.mgBot20,
                   isDisabled
                     ? AppStyles.btnAttackDisabled
                     : AppStyles.btnAttackActive

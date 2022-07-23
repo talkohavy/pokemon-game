@@ -49,19 +49,9 @@ export default function gameReducer(state = INITIAL_STATE, action) {
     case UPDATE_POKEMON_FOR:
       return {
         ...state,
-        player1: {
-          ...state.player1,
-          pokemon:
-            action.payload.for === 1
-              ? action.payload.data
-              : state.player1.pokemon,
-        },
-        player2: {
-          ...state.player2,
-          pokemon:
-            action.payload.for === 2
-              ? action.payload.data
-              : state.player2.pokemon,
+        [action.payload.for]: {
+          ...state[action.payload.for],
+          pokemon: action.payload.data,
         },
       };
     case UPDATE_HEALTH:
@@ -127,7 +117,10 @@ export default function gameReducer(state = INITIAL_STATE, action) {
           ...state.player1,
           health: INITIAL_STATE.player2.health,
         },
-        curGame: INITIAL_STATE.curGame,
+        curGame: { ...INITIAL_STATE.curGame },
+        stats: action.payload.includingStats
+          ? { ...INITIAL_STATE.stats }
+          : state.stats,
       };
     // case HARD_RESET:
     //   return INITIAL_STATE;

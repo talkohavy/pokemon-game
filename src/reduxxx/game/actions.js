@@ -28,8 +28,9 @@ export const enterEndGameMode = (data) => ({
   payload: data,
 });
 
-export const resetGame = () => ({
+export const resetGame = (data) => ({
   type: RESET_GAME,
+  payload: data,
 });
 
 // export const hardReset = () => ({

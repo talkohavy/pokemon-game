@@ -2,7 +2,7 @@ export const messages = {
   win: {
     title: 'You Win!',
     message:
-      'Congratulations! You have defeated your opponent. What would you like to do next?',
+      'Congratulations! You have defeated the enemy. What would you like to do next?',
   },
   lose: {
     title: 'Game Over!',

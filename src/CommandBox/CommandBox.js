@@ -10,9 +10,6 @@ import AppStyles from '../App.module.css';
 
 // utils:
 import { gameStatuses } from '../utils/helpers';
-import gameConfig from '../game.config';
-
-const { chooseBetween } = gameConfig;
 
 export default function CommandBox({
   curRound,

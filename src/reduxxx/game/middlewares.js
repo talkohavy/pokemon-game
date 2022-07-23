@@ -33,6 +33,7 @@ export const enterNewGameModeFlow =
 
     if (action.type === ENTER_NEW_GAME_MODE) {
       const { type = 'both' } = action.payload || {};
+      let includingStats = false;
       const data = { type };
       switch (type) {
         case 'both':
@@ -42,6 +43,7 @@ export const enterNewGameModeFlow =
           data.p2 =
             chooseBetween.min +
             Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min));
+          includingStats = true;
           break;
         case 'opponent':
           data.p2 =
@@ -53,10 +55,10 @@ export const enterNewGameModeFlow =
       }
       // A. show spinner
       dispatch(showSpinner());
-      // B. fetch whoRows
+      // B. reset game
+      dispatch(resetGame({ includingStats }));
+      // C. fetch whoRows
       dispatch(fetchPokemons(data));
-      // C. reset game
-      dispatch(resetGame());
     }
   };
 
@@ -76,20 +78,20 @@ export const enterFetchPokemonFlow =
       switch (type) {
         case 'both':
           data.URL = `https://pokeapi.co/api/v2/pokemon/${p1}/`;
-          data.config = { params: { player: 1, pid: p1 } };
+          data.config = { params: { player: 'player1', pid: p1 } };
           dispatch(apiRequest(data));
           data.URL = `https://pokeapi.co/api/v2/pokemon/${p2}/`;
-          data.config = { params: { player: 2, pid: p2 } };
+          data.config = { params: { player: 'player2', pid: p2 } };
           dispatch(apiRequest(data));
           break;
         case 'opponent':
           data.URL = `https://pokeapi.co/api/v2/pokemon/${p2}/`;
-          data.config = { params: { player: 2, pid: p2 } };
+          data.config = { params: { player: 'player2', pid: p2 } };
           dispatch(apiRequest(data));
           break;
         case 'me':
           data.URL = `https://pokeapi.co/api/v2/pokemon/${p1}/`;
-          data.config = { params: { player: 1, pid: p1 } };
+          data.config = { params: { player: 'player1', pid: p1 } };
           dispatch(apiRequest(data));
           break;
         default:
@@ -144,8 +146,8 @@ export const attackFlow =
       } = getState().game;
       if (gameStatus === gameStatuses.ongoing) {
         const result = attack();
-        const newHealth1 = 0; //Math.max(0, healthOfPlayer1 - result.dmgOfPlayer2);
-        const newHealth2 = 10; //Math.max(0, healthOfPlayer2 - result.dmgOfPlayer1);
+        const newHealth1 = Math.max(0, healthOfPlayer1 - result.dmgOfPlayer2);
+        const newHealth2 = Math.max(0, healthOfPlayer2 - result.dmgOfPlayer1);
         dispatch(updateRoundsResult(result));
         dispatch(updateHealthOf({ of: 'player1', data: newHealth1 }));
         dispatch(updateHealthOf({ of: 'player2', data: newHealth2 }));

@@ -57,7 +57,7 @@ export default function Dice({ value = '?' }) {
             </>
           );
         default:
-          return null;
+          return '?';
       }
     },
     [value]

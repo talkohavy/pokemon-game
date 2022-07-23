@@ -8,19 +8,13 @@ import { imgRedCircle } from '../../paths/images';
 // utils:
 import { messages } from './constants';
 import { gameStatuses } from '../../utils/helpers';
-import gameConfig from '../../game.config';
-
-const { chooseBetween } = gameConfig;
 
 export default function EndGame({
   curGameStatus,
   overallStats,
   closeEndGame,
   enterNewGameMode,
-  // hardReset,
 }) {
-  // all functions:
-
   if (curGameStatus === gameStatuses.ongoing) return null;
 
   //------------------- Render GUI ----------------------

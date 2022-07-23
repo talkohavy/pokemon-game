@@ -55,7 +55,6 @@ function App() {
         chooseBetween.min +
         Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min)),
     };
-    console.log('data is:', data);
     dispatch(enterNewGameMode(data));
   }, [dispatch]);
 

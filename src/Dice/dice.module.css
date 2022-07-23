@@ -1,4 +1,5 @@
 .dice {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,4 +8,62 @@
   font-size: 40px;
   border: 1px solid black;
   border-radius: 10px;
+}
+
+.dice div {
+  position: absolute;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: black;
+}
+
+.upperLeft {
+  top: 15px;
+  left: 15px;
+}
+
+.upperRight {
+  top: 15px;
+  right: 15px;
+}
+
+.upperCenter {
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.middleLeft {
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
+.middleRight {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+}
+
+.middleCenter {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.lowerLeft {
+  bottom: 15px;
+  left: 15px;
+}
+
+.lowerRight {
+  bottom: 15px;
+  right: 15px;
+}
+
+.lowerCenter {
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
 }

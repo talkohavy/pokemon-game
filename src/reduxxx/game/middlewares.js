@@ -110,14 +110,8 @@ export const attackFlow =
       } = getState().game;
       if (gameStatus === gameStatuses.ongoing) {
         const result = attack();
-        console.log('damages are:', result);
-        console.log('healths before are:', {
-          healthOfPlayer1,
-          healthOfPlayer2,
-        });
         const newHealth1 = Math.max(0, healthOfPlayer1 - result.dmgOfPlayer2);
         const newHealth2 = Math.max(0, healthOfPlayer2 - result.dmgOfPlayer1);
-        console.log('healths after are:', { newHealth1, newHealth2 });
         dispatch(updateRoundsResult(result));
         dispatch(updateHealthOf({ of: 'player1', data: newHealth1 }));
         dispatch(updateHealthOf({ of: 'player2', data: newHealth2 }));

@@ -26,3 +26,9 @@
   width: 120px;
   object-fit: cover;
 }
+
+@media only screen and (max-width: 1000px) {
+  .playerZone {
+    padding: 5px;
+  }
+}

@@ -27,6 +27,19 @@
   margin-bottom: 20px;
 }
 
+
+@media only screen and (max-width: 1000px) {
+  .gameTitle {
+    font-size: 32px;
+    margin-bottom: 0;
+  }
+
+  .gameZone {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+
 .spinnerWrapper {
   height: 100vh;
 }

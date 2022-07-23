@@ -19,7 +19,7 @@ import {
 } from './actions';
 import { openEndGame } from '../modals/actions';
 import { apiRequest } from '../api';
-import { attack, gameStatuses } from '../../gameLogic';
+import { attack, gameStatuses } from '../../utils/helpers';
 
 export const enterNewGameModeFlow =
   ({ dispatch }) =>
@@ -42,6 +42,7 @@ export const enterFetchPokemonFlow =
     next(action);
 
     if (action.type === FETCH_POKEMON) {
+      console.log('action.payload is:', action.payload);
       const { p1, p2 } = action.payload;
       const data = {
         method: 'GET',

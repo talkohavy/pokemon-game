@@ -7,7 +7,7 @@ import MyStyles from './endGame.module.css';
 import { imgRedCircle } from '../../paths/images';
 // utils:
 import { messages } from './constants';
-import { gameStatuses } from '../../gameLogic';
+import { gameStatuses } from '../../utils/helpers';
 
 export default function EndGame({ curGameStatus, overallStats, closeEndGame }) {
   // all functions:

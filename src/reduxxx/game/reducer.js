@@ -7,8 +7,9 @@ import {
   UPDATE_IS_ATTACKING,
   SHOW_SPINNER,
   HIDE_SPINNER,
+  REPORT_LOADING_ERROR,
 } from './actions';
-import { gameStatuses } from '../../gameLogic';
+import { gameStatuses } from '../../utils/helpers';
 
 const INITIAL_STATE = {
   player1: {
@@ -105,6 +106,11 @@ export default function gameReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         isLoading: false,
+      };
+    case REPORT_LOADING_ERROR:
+      return {
+        ...state,
+        isLoadingFailed: true,
       };
     default:
       return state;

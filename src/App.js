@@ -9,10 +9,15 @@ import { enterNewGameMode, attack } from './reduxxx/game/actions';
 import Player from './Player';
 import Dice from './Dice';
 import EndGameModal from './modals/EndGame';
+import LoadingFailed from './LoadingFailed';
 
 // utils:
-import { gameStatuses } from './gameLogic';
+import { gameStatuses } from './utils/helpers';
+import gameConfig from './utils/gameConfig';
 import AppStyles from './App.module.css';
+
+const { chooseBetween } = gameConfig;
+console.log('chooseBetween is:', chooseBetween);
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +27,7 @@ function App() {
     player2,
     curGame: { isAttacking, curRound, status: curGameStatus },
     isLoading,
+    isLoadingFailed,
     isEndGameModalOpen,
   } = useSelector((state) => {
     return {
@@ -29,6 +35,7 @@ function App() {
       player2: state.game.player2,
       curGame: state.game.curGame,
       isLoading: state.game.isLoading,
+      isLoadingFailed: state.game.isLoadingFailed,
       isEndGameModalOpen: state.modals.endgame,
     };
   });
@@ -41,9 +48,14 @@ function App() {
   // all useEffects:
   useEffect(() => {
     const data = {
-      p1: Math.floor(Math.random() * 150 + 1),
-      p2: Math.floor(Math.random() * 150 + 1),
+      p1:
+        chooseBetween.min +
+        Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min)),
+      p2:
+        chooseBetween.min +
+        Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min)),
     };
+    console.log('data is:', data);
     dispatch(enterNewGameMode(data));
   }, [dispatch]);
 
@@ -61,6 +73,8 @@ function App() {
       {isEndGameModalOpen && <EndGameModal />}
       {isLoading ? (
         <div>Loading...</div>
+      ) : isLoadingFailed ? (
+        <LoadingFailed />
       ) : (
         <>
           <div className={AppStyles.gameTitle}>Pokemon Battle Simulator</div>

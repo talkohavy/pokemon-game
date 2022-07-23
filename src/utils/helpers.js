@@ -1,3 +1,5 @@
+import config from './gameConfig';
+
 export const gameStatuses = {
   ongoing: 'ongoing',
   lose: 'lose',
@@ -11,7 +13,10 @@ export function roleDice() {
 }
 
 export function attack() {
-  return { dmgOfPlayer1: roleDice(), dmgOfPlayer2: roleDice() };
+  return {
+    dmgOfPlayer1: config.dmgFunction(),
+    dmgOfPlayer2: config.dmgFunction(),
+  };
 }
 
 export function changePokemon() {}

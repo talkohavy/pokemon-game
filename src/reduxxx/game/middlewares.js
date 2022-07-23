@@ -23,7 +23,7 @@ import { apiRequest } from '../api';
 import { attack, gameStatuses } from '../../utils/helpers';
 import gameConfig from '../../game.config';
 
-const { delayBetweenAttacks } = gameConfig;
+const { chooseBetween, delayBetweenAttacks } = gameConfig;
 
 export const enterNewGameModeFlow =
   ({ dispatch }) =>
@@ -32,10 +32,29 @@ export const enterNewGameModeFlow =
     next(action);
 
     if (action.type === ENTER_NEW_GAME_MODE) {
+      const { type = 'both' } = action.payload || {};
+      const data = { type };
+      switch (type) {
+        case 'both':
+          data.p1 =
+            chooseBetween.min +
+            Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min));
+          data.p2 =
+            chooseBetween.min +
+            Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min));
+          break;
+        case 'opponent':
+          data.p2 =
+            chooseBetween.min +
+            Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min));
+          break;
+        default:
+          console.log('How did you get here???');
+      }
       // A. show spinner
       dispatch(showSpinner());
       // B. fetch whoRows
-      dispatch(fetchPokemons(action.payload));
+      dispatch(fetchPokemons(data));
       // C. reset game
       dispatch(resetGame());
     }
@@ -48,19 +67,34 @@ export const enterFetchPokemonFlow =
     next(action);
 
     if (action.type === FETCH_POKEMON) {
-      console.log('action.payload is:', action.payload);
-      const { p1, p2 } = action.payload;
+      const { type, p1, p2 } = action.payload;
       const data = {
         method: 'GET',
-        URL: `https://pokeapi.co/api/v2/pokemon/${p1}/`,
-        config: { params: { player: 1, pid: p1 } },
         onSuccess: FETCH_POKEMON_SUCCESS,
         onFailure: FETCH_POKEMON_FAILURE,
       };
-      dispatch(apiRequest(data));
-      data.URL = `https://pokeapi.co/api/v2/pokemon/${p2}/`;
-      data.config = { params: { player: 2, pid: p2 } };
-      dispatch(apiRequest(data));
+      switch (type) {
+        case 'both':
+          data.URL = `https://pokeapi.co/api/v2/pokemon/${p1}/`;
+          data.config = { params: { player: 1, pid: p1 } };
+          dispatch(apiRequest(data));
+          data.URL = `https://pokeapi.co/api/v2/pokemon/${p2}/`;
+          data.config = { params: { player: 2, pid: p2 } };
+          dispatch(apiRequest(data));
+          break;
+        case 'opponent':
+          data.URL = `https://pokeapi.co/api/v2/pokemon/${p2}/`;
+          data.config = { params: { player: 2, pid: p2 } };
+          dispatch(apiRequest(data));
+          break;
+        case 'me':
+          data.URL = `https://pokeapi.co/api/v2/pokemon/${p1}/`;
+          data.config = { params: { player: 1, pid: p1 } };
+          dispatch(apiRequest(data));
+          break;
+        default:
+          console.log('you do not deserve to be a pokemon master...');
+      }
     }
   };
 

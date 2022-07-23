@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import clsx from 'clsx';
 
 // redux actions:
-import { enterNewGameMode, attack } from './reduxxx/game/actions';
+import { enterNewGameMode } from './reduxxx/game/actions';
 
 // components:
 import Player from './Player';
-import Dice from './Dice';
+import CommandBox from './CommandBox';
 import EndGameModal from './modals/EndGame';
 import Spinner from './Spinner';
 import LoadingFailed from './LoadingFailed';
 
 // utils:
 import AppStyles from './App.module.css';
-import { gameStatuses } from './utils/helpers';
-import gameConfig from './game.config';
-
-const { chooseBetween } = gameConfig;
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +21,7 @@ function App() {
   const {
     player1,
     player2,
-    curGame: { isAttacking, curRound, status: curGameStatus },
+    curGame: { isAttacking },
     isLoading,
     isLoadingFailed,
     isEndGameModalOpen,
@@ -40,31 +36,10 @@ function App() {
     };
   });
 
-  // all useStates:
-  const [isDisabled, setIsDisabled] = useState(
-    isAttacking || curGameStatus !== gameStatuses.ongoing
-  );
-
   // all useEffects:
   useEffect(() => {
-    const data = {
-      p1:
-        chooseBetween.min +
-        Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min)),
-      p2:
-        chooseBetween.min +
-        Math.floor(Math.random() * (chooseBetween.max - chooseBetween.min)),
-    };
-    dispatch(enterNewGameMode(data));
+    dispatch(enterNewGameMode());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (
-      isDisabled !== (isAttacking || curGameStatus !== gameStatuses.ongoing)
-    ) {
-      setIsDisabled((prevState) => !isDisabled);
-    }
-  }, [isAttacking, curGameStatus]);
 
   // --------------------- render GUI ---------------------------
   return (
@@ -86,69 +61,7 @@ function App() {
               pokemon={player1.pokemon}
               gotHit={isAttacking}
             />
-            <div
-              className={clsx(
-                AppStyles.overview,
-                AppStyles.flexColumnTopCenter
-              )}
-            >
-              <div className={AppStyles.dicesWrapper}>
-                <Dice value={curRound.dmgOfPlayer1} />
-                <Dice value={curRound.dmgOfPlayer2} />
-              </div>
-              <div className={AppStyles.roundResults}>
-                {!!curRound.dmgOfPlayer1 && (
-                  <div className={AppStyles.playerResults}>
-                    You hit for {curRound.dmgOfPlayer1}
-                  </div>
-                )}
-                {!!curRound.dmgOfPlayer2 && (
-                  <div className={AppStyles.playerResults}>
-                    Your opponent hit for {curRound.dmgOfPlayer2}
-                  </div>
-                )}
-              </div>
-              <button
-                className={clsx(
-                  AppStyles.btnAttackCommon,
-                  AppStyles.mgBot20,
-                  isDisabled
-                    ? AppStyles.btnAttackDisabled
-                    : AppStyles.btnAttackActive
-                )}
-                onClick={() => dispatch(attack())}
-                disabled={isDisabled}
-              >
-                Attack!
-              </button>
-              {curGameStatus !== gameStatuses.ongoing && (
-                <button
-                  className={clsx(
-                    AppStyles.btnAttackCommon,
-                    AppStyles.btnAttackActive
-                  )}
-                  onClick={() => {
-                    const data = {
-                      p1:
-                        chooseBetween.min +
-                        Math.floor(
-                          Math.random() *
-                            (chooseBetween.max - chooseBetween.min)
-                        ),
-                      p2:
-                        chooseBetween.min +
-                        Math.floor(
-                          Math.random() *
-                            (chooseBetween.max - chooseBetween.min)
-                        ),
-                    };
-                    dispatch(enterNewGameMode(data));
-                  }}
-                >
-                  New Game
-                </button>
-              )}
-            </div>
+            <CommandBox />
             <Player
               who={'opponent'}
               curHealth={player2.health}

@@ -1,0 +1,51 @@
+.overview {
+    padding: 15px;
+    max-width: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dicesWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.roundResults {
+    height: 120px;
+    border: 1px solid black;
+    margin-bottom: 30px;
+}
+
+.btnAttackCommon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: none;
+    height: 60px;
+    border-radius: 10px;
+    border: 1.5px solid #333;
+    font-size: var(--fs6);
+    font-family: Consolas, Arial, Helvetica, sans-serif;
+    padding: 0 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.btnAttackActive {
+    background-color: #ff353c;
+}
+
+.btnAttackActive:hover {
+    border-radius: 20px;
+}
+
+.btnAttackDisabled {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    background-color: #d1d1d1;
+    cursor: default;
+}
